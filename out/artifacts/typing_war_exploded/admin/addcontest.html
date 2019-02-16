@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SDUTACM在线打字系统</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../static/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../static/datetimepicker/bootstrap-datetimepicker.min.css">
+    <script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../static/js/user.js"></script>
+    <!--<script src="../static/js/message.js"></script>-->
+    <script src="../static/js/pagination.js"></script>
+    <script src="../static/js/time.js"></script>
+    <script src="../static/js/addcontest.js"></script>
+    <!--<script src="../static/bower_components/b"></script>-->
+
+
+
+</head>
+<body class="skin-blue sidebar-mini sidebar-collapse">
+<div class="wrapper" style="height: 100%;">
+    <header class="main-header">
+        <a href="#" class="logo">
+            <span class="logo-mini"><b>SDUT</b></span>
+            <span class="logo-lg"><b>SDUTACM在线打字</b></span>
+        </a>
+        <nav class="navbar navbar-static-top">
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="../static/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <span class="hidden-xs" id="user"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="../static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                <p>
+                                </p>
+                            </li>
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="#" class="btn btn-default btn-flat">个人信息</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="#" class="btn btn-default btn-flat">退出</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="../static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <span id="user11"></span><br>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">导航栏</li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-users"></i>
+                        <span>用户</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#"><i class="fa fa-user"></i> 管理员</a></li>
+                        <li><a href="user.html"><i class="fa fa-user"></i> 普通用户</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="messagelist.html">
+                        <i class="fa fa-book"></i> <span>文章管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="contest.html">
+                        <i class="fa fa-circle-o"></i> <span>比赛管理</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </aside>
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <div class="box box-solid box-primary">
+                        <div class="box-header">
+                            <h3 class="box-title">添加比赛信息</h3>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal" method="post" action="../AddContestinfo" onsubmit="return ti(2)">
+                                <div class="form-group">
+                                    <label for="firstname" class="col-sm-1 control-label">比赛名称</label>
+                                    <div class="col-sm-11">
+                                        <!--<input type="hidden" id="cid" name="cid">-->
+                                        <input type="hidden" id="upd_time" name="upd_time">
+                                        <input style="border-radius: 5px" type="text" class="form-control" id="contests_name" name="contests_name" placeholder="请输入比赛名称">
+                                        <label class="control-label" for="name" style="display: none;"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="firstname" class="col-sm-1 control-label" >比赛文章</label>
+                                    <div class="col-sm-11">
+                                        <select class="form-control" id="mesname" name="mesname"
+                                                onPropertyChange="showValue(this.value)" style="border-radius: 5px">
+                                            <!--<option value="2">普通用户</option>-->
+                                            <!--<option value="1">管理员</option>-->
+                                        </select>
+                                        <label class="control-label" for="level" style="display: none;"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="firstname" class="col-sm-1 control-label">开始时间</label>
+                                    <div class="col-sm-11">
+                                        <input style="border-radius: 5px" type="text" class="form_datetime form-control" id="begin_time" name="begin_time" autocomplete="off">
+                                        <label class="control-label" for="name" style="display: none;"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="firstname" class="col-sm-1 control-label">结束时间</label>
+                                    <div class="col-sm-11">
+                                        <input style="border-radius: 5px" type="text" class="form_datetime form-control" id="end_time" name="end_time" autocomplete="off">
+                                        <label class="control-label" for="name" style="display: none;"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="firstname" class="col-sm-1 control-label">时间</label>
+                                    <div class="col-sm-11">
+                                        <input style="border-radius: 5px" type="text" class="form-control" id="times" name="times" >
+                                        <label class="control-label" for="name" style="display: none;"></label>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-lg-12" id="1" style="text-align: right">
+                                        <button type="submit" class=" btn btn-block btn-primary btn-sm">添加比赛信息</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 1.0.0
+        </div>
+        <strong>Copyright &copy; 2018-2019 <a href="#">suyu</a>.</strong> All rights
+        reserved.
+    </footer>
+</div>
+<div class="control-sidebar-bg"></div>
+
+<!--<script src="../static/datetimepicker/jquery-1.8.3.min.js"></script>-->
+<script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../static/datetimepicker/bootstrap-datetimepicker.fr.js"></script>
+<script src="../static/datetimepicker/bootstrap-datetimepicker.js"></script>
+<script src="../static/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script>
+    $.widget.bridge('uibutton', $.ui.button);
+    $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+</script>
+
+
+<script src="../static/dist/js/adminlte.min.js"></script>
+</body>
+</html>

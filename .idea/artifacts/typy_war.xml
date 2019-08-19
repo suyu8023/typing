@@ -1,0 +1,32 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="typy:war">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <root id="archive" name="typy_war.war">
+      <element id="artifact" artifact-name="typy:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/json.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.ejb.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.jms.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/servlet-api.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/json-lib-2.3.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/ezmorph-1.0.6.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.servlet.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-io-2.6.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.resource.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-lang-2.5.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.annotation.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.persistence.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.servlet.jsp.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.transaction.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-logging-1.1.1.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/javax.servlet.jsp.jstl.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-beanutils-1.8.0.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-fileupload-1.3.3.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-collections-3.2.1.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/mysql-connector-java-5.1.7-bin.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

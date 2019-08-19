@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/MessageServlet")
+@WebServlet("/Message")
 public class MessageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -26,51 +26,68 @@ public class MessageServlet extends HttpServlet {
         String mid = request.getParameter("mid");
         String page = request.getParameter("page");
         String limit = request.getParameter("limit");
+        String all = request.getParameter("all");
         int status = Integer.parseInt(request.getParameter("status"));
-
+//        System.out.println("-=-=-="+ name + status + all);
         PrintWriter out = response.getWriter();
-        if(status==1) {
-            if (name.isEmpty()) {
-
-                try {
-                    MessageDao message = new MessageDao();
-                    JSONArray jsonarray = new JSONArray();
-                    int page1= Integer.parseInt(page);
-                    int limit1 = Integer.parseInt(limit);
-                    jsonarray = message.get_ListInfo(page1,limit1);
-                    out = response.getWriter();
-                    out.println(jsonarray);
-                } catch (Exception e) {
-                    out.print("");
-                    e.printStackTrace();
+//        if (!all.isEmpty()){
+//
+//        }
+        if (all==null) {
+            if (status == 1) {
+                if (name.isEmpty()) {
+                    try {
+                        MessageDao message = new MessageDao();
+                        JSONArray jsonarray = new JSONArray();
+                        int page1 = Integer.parseInt(page);
+                        int limit1 = Integer.parseInt(limit);
+                        jsonarray = message.get_ListInfo(page1, limit1);
+                        out = response.getWriter();
+                        out.println(jsonarray);
+                    } catch (Exception e) {
+                        out.print("");
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        MessageDao message = new MessageDao();
+                        JSONArray jsonarray = new JSONArray();
+                        jsonarray = message.mesname(name);
+                        out = response.getWriter();
+                        out.println(jsonarray);
+                    } catch (Exception e) {
+                        out.print("");
+                        e.printStackTrace();
+                    }
                 }
-            }
-            else{
-                try {
-                    MessageDao message = new MessageDao();
-                    JSONArray jsonarray = new JSONArray();
-                    jsonarray = message.mesname(name);
-                    out = response.getWriter();
-                    out.println(jsonarray);
-                } catch (Exception e) {
-                    out.print("");
-                    e.printStackTrace();
+            } else {
+                if (mid.length() > 0) {
+                    try {
+                        int mi = Integer.parseInt(mid);
+                        MessageDao message = new MessageDao();
+                        JSONArray jsonarray = new JSONArray();
+                        jsonarray = message.mes_info(mi);
+                        out = response.getWriter();
+                        out.println(jsonarray);
+                    } catch (Exception e) {
+                        out.print("");
+                        e.printStackTrace();
+                    }
                 }
             }
         }
-        else{
-            if (mid.length()>0) {
-                try {
-                    int mi = Integer.parseInt(mid);
-                    MessageDao message = new MessageDao();
-                    JSONArray jsonarray = new JSONArray();
-                    jsonarray = message.mes_info(mi);
-                    out = response.getWriter();
-                    out.println(jsonarray);
-                } catch (Exception e) {
-                    out.print("");
-                    e.printStackTrace();
-                }
+        else  {
+            try {
+                MessageDao message = new MessageDao();
+                JSONArray jsonarray = new JSONArray();
+                int page1 = Integer.parseInt(page);
+                int limit1 = Integer.parseInt(limit);
+                jsonarray = message.get_ListInfo(-1, limit1);
+                out = response.getWriter();
+                out.println(jsonarray);
+            } catch (Exception e) {
+                out.print("");
+                e.printStackTrace();
             }
         }
     }

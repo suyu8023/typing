@@ -26,7 +26,7 @@ $(document).ready(function() {
                 });
             }
             else {
-                var totalCount = Number(data.length), showCount = 1,limit = 13;
+                var totalCount = Number(data[0].count), showCount = 1,limit = 13;
                 createTable(1, limit, totalCount);
                 $('#page').pagination({
                     totalCount: totalCount,

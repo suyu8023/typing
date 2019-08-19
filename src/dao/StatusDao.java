@@ -42,10 +42,14 @@ public class StatusDao {
         String sql;
         if (page == 0) {
             if (sta==1){
-                sql = "select * from status order by speed*correct_rate desc";
+//                sql = "select count(sid) from status order by speed*correct_rate desc";
+                sql = "select count(sid) as ss from status";
+
             }
             else{
-                sql = "select * from status order by sid desc";
+//                sql = "select count(sid) from status order by sid desc";
+                sql = "select count(sid) as ss from status";
+
             }
 
         } else {
@@ -53,7 +57,7 @@ public class StatusDao {
                 sql = "select * from status order by speed*correct_rate desc limit " + li + "," + li1;
             }
             else{
-                sql = "select * from status order by sid desc limit " + li + "," + li1;
+                sql = "select * from status order by time desc limit " + li + "," + li1;
             }
 
         }
@@ -65,7 +69,16 @@ public class StatusDao {
             rs = stm.executeQuery();
             JSONArray jsonarray = new JSONArray();
             JSONObject jsonobj = new JSONObject();
-            while (rs.next()) {
+            if (page == 0){
+//                System.out.println(stm);
+                rs.next();
+//                while(rs.next())
+//                System.out.println(rs.getInt("ss"));
+                jsonobj.put("count", rs.getInt("ss"));
+                jsonarray.add(jsonobj);
+            }
+            else{
+                while (rs.next()) {
                 jsonobj.put("sid", rs.getInt("sid"));
                 jsonobj.put("uid", rs.getString("uid"));
                 jsonobj.put("mid", rs.getString("mid"));
@@ -81,6 +94,8 @@ public class StatusDao {
 
                 jsonarray.add(jsonobj);
             }
+            }
+
             rs.close();
             return jsonarray;
         } catch (SQLException e) {
@@ -98,10 +113,10 @@ public class StatusDao {
         String sql;
         if (page == 0) {
             if (sta==1){
-                sql = "select * from status where uid='" + uid + "'"+" order by speed*correct_rate desc";
+                sql = "select count(uid) as ss from status where uid='" + uid + "'";
             }
             else{
-                sql = "select * from status where uid='" + uid + "'"+" order by sid desc";
+                sql = "select count(uid) as ss from status where uid='" + uid + "'";
             }
 
         } else {
@@ -120,21 +135,30 @@ public class StatusDao {
             rs = stm.executeQuery();
             JSONArray jsonarray = new JSONArray();
             JSONObject jsonobj = new JSONObject();
-            while (rs.next()) {
-                jsonobj.put("sid", rs.getInt("sid"));
-                jsonobj.put("uid", rs.getString("uid"));
-                jsonobj.put("mid", rs.getString("mid"));
-                jsonobj.put("username", rs.getString("username"));
-                jsonobj.put("nickname", rs.getString("nickname"));
-                jsonobj.put("mesname", rs.getString("mesname"));
-                jsonobj.put("speed", rs.getString("speed"));
-                jsonobj.put("correct_rate", rs.getString("correct_rate"));
-                jsonobj.put("grade", rs.getString("grade"));
-                jsonobj.put("wordnum", rs.getString("wordnum"));
-                jsonobj.put("time", rs.getString("time"));
-                jsonobj.put("wrtime", rs.getString("wrtime"));
-
+            if (page == 0){
+//                System.out.println(stm);
+                rs.next();
+//                while(rs.next())
+//                System.out.println(rs.getInt("ss"));
+                jsonobj.put("count", rs.getInt("ss"));
                 jsonarray.add(jsonobj);
+            }else {
+                while (rs.next()) {
+                    jsonobj.put("sid", rs.getInt("sid"));
+                    jsonobj.put("uid", rs.getString("uid"));
+                    jsonobj.put("mid", rs.getString("mid"));
+                    jsonobj.put("username", rs.getString("username"));
+                    jsonobj.put("nickname", rs.getString("nickname"));
+                    jsonobj.put("mesname", rs.getString("mesname"));
+                    jsonobj.put("speed", rs.getString("speed"));
+                    jsonobj.put("correct_rate", rs.getString("correct_rate"));
+                    jsonobj.put("grade", rs.getString("grade"));
+                    jsonobj.put("wordnum", rs.getString("wordnum"));
+                    jsonobj.put("time", rs.getString("time"));
+                    jsonobj.put("wrtime", rs.getString("wrtime"));
+
+                    jsonarray.add(jsonobj);
+                }
             }
             rs.close();
             return jsonarray;

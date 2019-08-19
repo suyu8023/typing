@@ -31,7 +31,7 @@ $(document).ready(function() {
                 });
             }
             else {
-                var totalCount = Number(data.length), showCount = 1,limit = 13;
+                var totalCount = Number(data[0].count), showCount = 1,limit = 13;
                 createTable(1, limit, totalCount);
                 $('#page').pagination({
                     totalCount: totalCount,
@@ -76,16 +76,16 @@ $(document).ready(function() {
                         html.push('<td>' + '<a href="Practice?mid='+data[i].mid+'"'+'>'+data[ i].mesname +'</a>'+ '</td>');
                         html.push('<td>' + data[i].speed+"KPM" + '</td>');
                         html.push('<td>' + data[ i].correct_rate +"%"+ '</td>');
-                        if (data[i].grade==="优秀,继续保持!") {
+                        if (data[i].grade==="优秀,继续保持!"||data[i].grade==="优秀,继续保持！") {
                             html.push('<td style="color: red">' + data[ i].grade + '</td>');
                         }
-                        else if (data[i].grade==="良好,继续加油!") {
+                        else if (data[i].grade==="良好,继续加油!"||data[i].grade==="良好,继续加油！") {
                             html.push('<td style="color: #B30099">' + data[ i].grade + '</td>');
                         }
-                        else if (data[i].grade==="及格,继续努力!") {
+                        else if (data[i].grade==="及格,继续努力!"||data[i].grade==="及格,继续努力！") {
                             html.push('<td style="color:#090">' + data[ i].grade + '</td>');
                         }
-                        else if (data[i].grade==="不及格,加强练习!") {
+                        else if (data[i].grade==="不及格,加强练习!"||data[i].grade==="不及格,加强练习！") {
                             html.push('<td style="color:#25a6ef">' + data[ i].grade + '</td>');
                         }
                         html.push('<td>' + data[ i].wordnum + '</td>');

@@ -29,7 +29,7 @@ function find() {
             });
             }
             else {
-                var totalCount = Number(data.length), showCount = 1;
+                var totalCount = Number(data[0].count), showCount = 1;
                 limit = 13;
                 createTable(1, limit, totalCount);
                 $('#page').pagination({
@@ -53,9 +53,12 @@ function find() {
             type: 'get',
             dataType : "json",
             async:false,
-            url : "../Message?name="+str+"&status=1" +"&page=1"+"&limit="+limit,
+            url : "../Message?name="+str+"&status=1" +"&page="+currPage+"&limit="+limit,
             success:function(data){
                 if (data.length>0) {
+                    if(data.length<showNum){
+                        showNum = data.length;
+                    }
                     for (var i = 0; i < showNum; i++) {
                         // html.push('<tr><td>' + data[limit * (currPage - 1) + i].mid + '</td>');
                         // html.push('<td>' + data[limit * (currPage - 1) + i].name + '</td>');

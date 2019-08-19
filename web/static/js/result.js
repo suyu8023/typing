@@ -26,7 +26,7 @@ $(document).ready(function () {
         async: false,
         url: "../../home/Contest/status?" + url + "&page=0" + "&limit=" + limit,
         success: function (data) {
-            if (data.length == 0) {
+            if (data.length==0){
                 var totalCount = Number(data.length), showCount = 1, limit = 0;
                 createTable(1, limit, totalCount);
                 $('#page').pagination({
@@ -40,31 +40,9 @@ $(document).ready(function () {
                 });
             }
             else {
-                var totalCount = Number(data.length), showCount = 1, limit = 13;
-                // console.log(url.substring(0, 3));
-                if (url.substring(0, 3) == "cid") {
-                    for (var i = 0; i < data.length; i++) {
-                        // console.log(data[i].username,usern);
-                        var ss = document.getElementById("user11").innerHTML;
-                        // console.log(ss);
-                        var flag = 0;
-
-                        if (ss.replace(/(^\s*)|(\s*$)/g, "") == data[i].username.replace(/(^\s*)|(\s*$)/g, "")) {
-                            document.getElementById("person").innerHTML = "您的最好成绩为: 第" + (i + 1) + "名";
-                            // document.getElementById("person").value ="qwerty";
-                            flag = 1;
-                            break;
-                        }
-                        if (flag == 0) {
-                            document.getElementById("person").innerHTML = "抱歉，您没有参加此次比赛！";
-                        }
-
-                    }
-                }
-                else{
-                    document.getElementById("person").innerHTML = "";
-
-                }
+                var totalCount = Number(data[0].count), showCount = 1;
+                limit = 13;
+                console.log(totalCount);
                 createTable(1, limit, totalCount);
                 $('#page').pagination({
                     totalCount: totalCount,

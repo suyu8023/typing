@@ -128,7 +128,7 @@ public class UserDao {
         int li = page * limit - limit;
         String sql;
         if (page == 0) {
-            sql = "select * from user";
+            sql = "select count(uid) as ss from user";
         } else {
             sql = "select * from user limit " + li + "," + limit;
         }
@@ -140,16 +140,25 @@ public class UserDao {
             rs = stm.executeQuery();
             JSONArray jsonarray = new JSONArray();
             JSONObject jsonobj = new JSONObject();
-            while (rs.next()) {
-                jsonobj.put("uid", rs.getInt("uid"));
-                jsonobj.put("username", rs.getString("username"));
-                jsonobj.put("nickname", rs.getString("nickname"));
-                jsonobj.put("email", rs.getString("email"));
-                jsonobj.put("status", rs.getString("status"));
-                jsonobj.put("ip", rs.getString("ip"));
-                jsonobj.put("login_time", rs.getString("login_time"));
-                jsonobj.put("reg_time", rs.getString("reg_time"));
+            if (page == 0){
+//                System.out.println(stm);
+                rs.next();
+//                while(rs.next())
+//                System.out.println(rs.getInt("ss"));
+                jsonobj.put("count", rs.getInt("ss"));
                 jsonarray.add(jsonobj);
+            }else {
+                while (rs.next()) {
+                    jsonobj.put("uid", rs.getInt("uid"));
+                    jsonobj.put("username", rs.getString("username"));
+                    jsonobj.put("nickname", rs.getString("nickname"));
+                    jsonobj.put("email", rs.getString("email"));
+                    jsonobj.put("status", rs.getString("status"));
+                    jsonobj.put("ip", rs.getString("ip"));
+                    jsonobj.put("login_time", rs.getString("login_time"));
+                    jsonobj.put("reg_time", rs.getString("reg_time"));
+                    jsonarray.add(jsonobj);
+                }
             }
             rs.close();
             return jsonarray;

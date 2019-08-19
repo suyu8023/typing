@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SDUTACM在线打字系统</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="static/dist/css/skins/_all-skins.min.css">
+    <script src="static/bower_components/jquery/dist/jquery.min.js"></script>
+    <!--<script src="static/js/user.js"></script>-->
+    <!--<script src="static/js/getuserinfo.js"></script>-->
+    <!--<script src="static/js/pagination.js"></script>-->
+    <!--<script src="static/js/time.js"></script>-->
+    <script src="static/js/registered.js"></script>
+
+</head>
+<body class="skin-blue sidebar-mini sidebar-collapse">
+<div class="wrapper" style="height: 100%;">
+    <header class="main-header">
+        <a href="#" class="logo">
+            <span class="logo-mini"><b>SDUT</b></span>
+            <span class="logo-lg"><b>SDUTACM在线打字</b></span>
+        </a>
+        <nav class="navbar navbar-static-top">
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="static/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <span class="hidden-xs" id="user"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                <p>
+                                </p>
+                            </li>
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="#" class="btn btn-default btn-flat">个人信息</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="#" class="btn btn-default btn-flat">退出</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <br>
+                    <a href="#"><i class="fa fa-circle text-danger"></i> Offline</a>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">导航栏</li>
+                <li>
+                    <a href="home/practice.html">
+                        <i class="fa fa-book"></i> <span>Practice</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="home/contest.html">
+                        <i class="fa fa-circle-o"></i> <span>Contest</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="home/status.html">
+                        <i class="fa fa-book"></i> <span>Status</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="home/rank.html">
+                        <i class="fa fa-circle-o"></i> <span>Rank</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </aside>
+    <div class="content-wrapper" id="photo" name="photo" style="background-repeat: no-repeat; background-attachment: fixed;background-size: cover">
+        <section class="content">
+            <div style="background: white;margin: 2% 30% 10% 30%;border-radius: 10px;">
+                <br>
+                <form action="AddUser" method="post" onsubmit="return jud(6)">
+                    <p style="font-size: 30px;text-align: center">用户注册</p>
+                    <div style="margin-top: 3%">
+                        <input type="hidden" id="rel_time" name="rel_time">
+                        <input type="hidden" id="upd_time" name="upd_time">
+                        <input class="form-control" style="border-radius: 5px;font-size:16px;height:48px;width: 80%;margin-left: 10%" placeholder="用户名" id="username" name="username" oninput="jud(1)">
+                        <span style="margin-left: 10%" id="user1"></span>
+                        <br>
+                        <input  class="form-control" style="border-radius: 5px;font-size:16px;height:48px;width: 80%;margin-left: 10%" placeholder="昵称" id="nickname" name="nickname" oninput="jud(2)">
+                        <span style="margin-left: 10%" id="user2"></span>
+                        <br>
+                        <input  class="form-control" style="border-radius: 5px;font-size:16px;height:48px;width: 80%;margin-left: 10%" placeholder="邮箱" id="email" name="email" oninput="jud(3)">
+                        <span style="margin-left: 10%" id="user3"></span>
+                        <br>
+                        <input type="password" class="form-control" style="border-radius: 5px;font-size:16px;height:48px;width: 80%;margin-left: 10%" placeholder="密码" id="password" name="password" oninput="jud(4)">
+                        <span style="margin-left: 10%" id="user4"></span>
+                        <br>
+                        <input type="password" class="form-control" style="border-radius: 5px;font-size:16px;height:48px;width: 80%;margin-left: 10%" placeholder="确认密码" id="password1" name="password1" oninput="jud(5)">
+                        <span style="margin-left: 10%" id="user5"></span>
+                        <br>
+                    </div>
+                    <div style="margin-top: 2%">
+                        <button type="submit" class="btn btn-block btn-primary btn-lg" style="border-radius: 24px;width: 80%;margin-left: 10%">注册</button>
+                    </div>
+                </form>
+                <div style="margin-top: 1%">
+                    <a href="login.html">
+                        <button type="button" class="btn btn-block btn-primary btn-lg" style="border-radius: 24px;width: 80%;margin-left: 10%">登录</button>
+                    </a>
+                </div>
+                <br>
+            </div>
+        </section>
+    </div>
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 1.0.0
+        </div>
+        <strong>Copyright &copy; 2018-2019 <a href="#">suyu</a>.</strong> All rights
+        reserved.
+    </footer>
+</div>
+<div class="control-sidebar-bg"></div>
+
+
+<script src="static/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script>
+    $.widget.bridge('uibutton', $.ui.button);
+</script>
+<script src="static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="static/dist/js/adminlte.min.js"></script>
+</body>
+</html>

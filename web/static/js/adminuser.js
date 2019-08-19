@@ -29,7 +29,7 @@ function find() {
                 });
             }
             else {
-                var totalCount = Number(data.length), showCount = 1;
+                var totalCount = Number(data[0].count), showCount = 1;
                 limit = 13;
                 createTable(1, limit, totalCount);
                 $('#page').pagination({
@@ -48,14 +48,18 @@ function find() {
         var html = [], showNum = limit;
         if (total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
         html.push(' <table class="table table-hover table-bordered" cellspacing="0" width="100%">');
-        html.push(' <thead><tr><th style="font-size: 20px">ID</th><th style="font-size: 20px">用户名</th><th style="font-size: 20px">昵称</th><th style="font-size: 20px">邮箱</th><th style="font-size: 20px">登录ip</th><th style="font-size: 20px">登陆时间</th><th style="font-size: 20px">注册时间</th></tr></thead><tbody>');
+        html.push(' <thead><tr><th style="font-size: 20px">ID</th><th style="font-size: 20px">用户名</th><th style="font-size: 20px">昵称</th><th style="font-size: 20px">邮箱</th><th style="font-size: 20px">登录ip</th><th style="font-size: 20px">登陆时间</th><th style="font-size: 20px">注册时间</th><th style="font-size: 20px">操作</th></tr></thead><tbody>');
         $.ajax({
             type: 'get',
             dataType : "json",
             async:false,
             url : "../AdminUser?name="+str+"&status=1" +"&page="+currPage+"&limit="+limit,
             success:function(data){
+
                 if (data.length>0) {
+                    if(data.length<showNum){
+                        showNum = data.length;
+                    }
                     for (var i = 0; i < showNum; i++) {
                         // html.push('<tr><td>' + data[limit * (currPage - 1) + i].mid + '</td>');
                         // html.push('<td>' + data[limit * (currPage - 1) + i].name + '</td>');

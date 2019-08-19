@@ -28,7 +28,7 @@ function find() {
                 });
             }
             else {
-                var totalCount = Number(data.length), showCount = 1;
+                var totalCount = Number(data[0].count), showCount = 1;
                 limit = 13;
                 createTable(1, limit, totalCount);
                 $('#page').pagination({
@@ -54,8 +54,14 @@ function find() {
             async:false,
             url : "../Message?name="+str+"&status=1"+"&page="+currPage+"&limit="+limit,
             success:function(data){
+                // console.log(data);
                 if (data.length>0) {
+                    if(data.length<showNum){
+                        showNum = data.length;
+                    }
                     for (var i = 0; i < showNum; i++) {
+
+                        // console.log(data[i].mid)
                         // html.push('<tr><td>' + data[limit * (currPage - 1) + i].mid + '</td>');
                         // html.push('<td>' + '<a href="Practice?mid='+data[limit * (currPage - 1) + i].mid+'"'+'>'+data[limit * (currPage - 1) + i].name +'</a>'+ '</td>');
                         // html.push('<td>' + data[limit * (currPage - 1) + i].autor + '</td>');

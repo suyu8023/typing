@@ -64,9 +64,9 @@ public class ContestDao {
         int li = page * limit - limit;
         String sql;
         if (page == 0) {
-            sql = "select * from contest";
+            sql = "select count(cid) as ss from contest";
         } else {
-            sql = "select * from contest limit " + li + "," + limit;
+            sql = "select * from contest order by cid desc limit " + li + "," + limit;
         }
 
         PreparedStatement stm = null;
@@ -76,16 +76,25 @@ public class ContestDao {
             rs = stm.executeQuery();
             JSONArray jsonarray = new JSONArray();
             JSONObject jsonobj = new JSONObject();
-            while (rs.next()) {
-                jsonobj.put("cid", rs.getInt("cid"));
-                jsonobj.put("contests_name", rs.getString("contests_name"));
-                jsonobj.put("autor", rs.getString("autor"));
-                jsonobj.put("mid", rs.getString("mid"));
-                jsonobj.put("begin_time", rs.getString("begin_time"));
-                jsonobj.put("end_time", rs.getString("end_time"));
-                jsonobj.put("create_time", rs.getString("create_time"));
-                jsonobj.put("times", rs.getString("times"));
+            if (page == 0){
+//                System.out.println(stm);
+                rs.next();
+//                while(rs.next())
+//                System.out.println(rs.getInt("ss"));
+                jsonobj.put("count", rs.getInt("ss"));
                 jsonarray.add(jsonobj);
+            }else {
+                while (rs.next()) {
+                    jsonobj.put("cid", rs.getInt("cid"));
+                    jsonobj.put("contests_name", rs.getString("contests_name"));
+                    jsonobj.put("autor", rs.getString("autor"));
+                    jsonobj.put("mid", rs.getString("mid"));
+                    jsonobj.put("begin_time", rs.getString("begin_time"));
+                    jsonobj.put("end_time", rs.getString("end_time"));
+                    jsonobj.put("create_time", rs.getString("create_time"));
+                    jsonobj.put("times", rs.getString("times"));
+                    jsonarray.add(jsonobj);
+                }
             }
             rs.close();
             return jsonarray;
@@ -173,8 +182,10 @@ public class ContestDao {
         int li1 = limit;
         String sql;
         if (page == 0) {
+//            sql = "SELECT p.count(*) FROM (SELECT * FROM conteststatus where cid='" + cid + "'" + "ORDER BY speed*correct_rate DESC  LIMIT 1000 )p GROUP BY  p.uid ORDER BY speed*correct_rate desc";
+            sql = "select count(distinct uid) as ss from conteststatus where cid='" + cid + "'";
+//            sql = "SELECT count(cid) as ss FROM conteststatus where cid='" + cid + "'";
 
-            sql = "SELECT p.* FROM (SELECT * FROM conteststatus where cid='" + cid + "'" + "ORDER BY speed*correct_rate DESC  LIMIT 1000 )p GROUP BY  p.uid ORDER BY speed*correct_rate desc";
 // sql="select * from conteststatus where cid='"+cid+"'"+" and csid in (select maxid from (select max(csid) as maxid, max(speed*correct_rate) as qq from conteststatus where cid='"+cid+"'"+" group by uid) b) ORDER BY speed*correct_rate DESC";
 
         } else {
@@ -189,26 +200,35 @@ public class ContestDao {
             rs = stm.executeQuery();
             JSONArray jsonarray = new JSONArray();
             JSONObject jsonobj = new JSONObject();
-            while (rs.next()) {
-                jsonobj.put("csid", rs.getInt("csid"));
-                jsonobj.put("cid", rs.getString("cid"));
-                jsonobj.put("uid", rs.getString("uid"));
-                jsonobj.put("mid", rs.getString("mid"));
+            if (page == 0){
+//                System.out.println(stm);
+                rs.next();
+//                while(rs.next())
+//                System.out.println(rs.getInt("ss"));
+                jsonobj.put("count", rs.getInt("ss"));
+                jsonarray.add(jsonobj);
+            }else {
+                while (rs.next()) {
+                    jsonobj.put("csid", rs.getInt("csid"));
+                    jsonobj.put("cid", rs.getString("cid"));
+                    jsonobj.put("uid", rs.getString("uid"));
+                    jsonobj.put("mid", rs.getString("mid"));
 //                jsonobj.put("message", rs.getString("message"));
-                jsonobj.put("username", rs.getString("username"));
-                jsonobj.put("nickname", rs.getString("nickname"));
-                jsonobj.put("mesname", rs.getString("mesname"));
-                jsonobj.put("speed", rs.getString("speed"));
-                jsonobj.put("correct_rate", rs.getString("correct_rate"));
-                jsonobj.put("grade", rs.getString("grade"));
-                jsonobj.put("wordnum", rs.getString("wordnum"));
-                jsonobj.put("time", rs.getString("time"));
-                jsonobj.put("wrtime", rs.getString("wrtime"));
+                    jsonobj.put("username", rs.getString("username"));
+                    jsonobj.put("nickname", rs.getString("nickname"));
+                    jsonobj.put("mesname", rs.getString("mesname"));
+                    jsonobj.put("speed", rs.getString("speed"));
+                    jsonobj.put("correct_rate", rs.getString("correct_rate"));
+                    jsonobj.put("grade", rs.getString("grade"));
+                    jsonobj.put("wordnum", rs.getString("wordnum"));
+                    jsonobj.put("time", rs.getString("time"));
+                    jsonobj.put("wrtime", rs.getString("wrtime"));
 //                jsonobj.put("instan", rs.getString("instan"));
 //                String str = (String)jsonobj.get("message");
 //                str = str.replace("\r\n","'+'\\n'+'");
 //                jsonobj.put("message", str);
-                jsonarray.add(jsonobj);
+                    jsonarray.add(jsonobj);
+                }
             }
             rs.close();
             return jsonarray;
@@ -227,7 +247,7 @@ public class ContestDao {
         String sql;
         if (page == 0) {
 //            if (sta==1){
-            sql = "select * from conteststatus where cid='" + cid + "'" + " and uid='" + uid + "'" + " ORDER BY speed*correct_rate DESC";
+            sql = "select count(*) as ss from conteststatus where cid='" + cid + "'" + " and uid='" + uid + "'";
 //                sql = "select * from conteststatus where cid='" + cid + "'"+" order by speed*correct_rate desc";
 //            }
 //            else{
@@ -252,26 +272,35 @@ public class ContestDao {
             rs = stm.executeQuery();
             JSONArray jsonarray = new JSONArray();
             JSONObject jsonobj = new JSONObject();
-            while (rs.next()) {
-                jsonobj.put("csid", rs.getInt("csid"));
-                jsonobj.put("cid", rs.getString("cid"));
-                jsonobj.put("uid", rs.getString("uid"));
-                jsonobj.put("mid", rs.getString("mid"));
+            if (page == 0){
+//                System.out.println(stm);
+                rs.next();
+//                while(rs.next())
+//                System.out.println(rs.getInt("ss"));
+                jsonobj.put("count", rs.getInt("ss"));
+                jsonarray.add(jsonobj);
+            }else {
+                while (rs.next()) {
+                    jsonobj.put("csid", rs.getInt("csid"));
+                    jsonobj.put("cid", rs.getString("cid"));
+                    jsonobj.put("uid", rs.getString("uid"));
+                    jsonobj.put("mid", rs.getString("mid"));
 //                jsonobj.put("message", rs.getString("message"));
-                jsonobj.put("username", rs.getString("username"));
-                jsonobj.put("nickname", rs.getString("nickname"));
-                jsonobj.put("mesname", rs.getString("mesname"));
-                jsonobj.put("speed", rs.getString("speed"));
-                jsonobj.put("correct_rate", rs.getString("correct_rate"));
-                jsonobj.put("grade", rs.getString("grade"));
-                jsonobj.put("wordnum", rs.getString("wordnum"));
-                jsonobj.put("time", rs.getString("time"));
-                jsonobj.put("wrtime", rs.getString("wrtime"));
+                    jsonobj.put("username", rs.getString("username"));
+                    jsonobj.put("nickname", rs.getString("nickname"));
+                    jsonobj.put("mesname", rs.getString("mesname"));
+                    jsonobj.put("speed", rs.getString("speed"));
+                    jsonobj.put("correct_rate", rs.getString("correct_rate"));
+                    jsonobj.put("grade", rs.getString("grade"));
+                    jsonobj.put("wordnum", rs.getString("wordnum"));
+                    jsonobj.put("time", rs.getString("time"));
+                    jsonobj.put("wrtime", rs.getString("wrtime"));
 //                jsonobj.put("instan", rs.getString("instan"));
 //                String str = (String)jsonobj.get("message");
 //                str = str.replace("\r\n","'+'\\n'+'");
 //                jsonobj.put("message", str);
-                jsonarray.add(jsonobj);
+                    jsonarray.add(jsonobj);
+                }
             }
             rs.close();
             return jsonarray;

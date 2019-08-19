@@ -37,11 +37,15 @@ public class MessageDao {
         Connection conn = JdbcUtil.getConnection();
         int li = page*limit-limit;
         String sql;
-        if (page==0){
+        if (page == -1){
             sql = "select * from message";
         }
-        else{
-            sql = "select * from message limit "+li+","+limit;
+        else {
+            if (page == 0) {
+                sql = "select count(*) as ss from message";
+            } else {
+                sql = "select * from message limit " + li + "," + limit;
+            }
         }
 
         PreparedStatement stm = null;
@@ -51,18 +55,27 @@ public class MessageDao {
             rs = stm.executeQuery();
             JSONArray jsonarray = new JSONArray();
             JSONObject jsonobj = new JSONObject();
-            while(rs.next()){
-                jsonobj.put("mid", rs.getInt("mid"));
-                jsonobj.put("name", rs.getString("name"));
-                jsonobj.put("autor", rs.getString("autor"));
+            if (page == 0){
+//                System.out.println(stm);
+                rs.next();
+//                while(rs.next())
+//                System.out.println(rs.getInt("ss"));
+                jsonobj.put("count", rs.getInt("ss"));
+                jsonarray.add(jsonobj);
+            }else {
+                while (rs.next()) {
+                    jsonobj.put("mid", rs.getInt("mid"));
+                    jsonobj.put("name", rs.getString("name"));
+                    jsonobj.put("autor", rs.getString("autor"));
 //                jsonobj.put("message", rs.getString("message"));
-                jsonobj.put("diff", rs.getString("diff"));
-                jsonobj.put("rel_time", rs.getString("rel_time"));
-                jsonobj.put("upd_time", rs.getString("upd_time"));
+                    jsonobj.put("diff", rs.getString("diff"));
+                    jsonobj.put("rel_time", rs.getString("rel_time"));
+                    jsonobj.put("upd_time", rs.getString("upd_time"));
 //                String str = (String)jsonobj.get("message");
 //                str = str.replace("\r\n","'+'\\n'+'");
 //                jsonobj.put("message", str);
-                jsonarray.add(jsonobj);
+                    jsonarray.add(jsonobj);
+                }
             }
             rs.close();
             return jsonarray;

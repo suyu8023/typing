@@ -77,7 +77,7 @@ public class ContestDao {
             JSONArray jsonarray = new JSONArray();
             JSONObject jsonobj = new JSONObject();
             if (page == 0){
-//                System.out.println(stm);
+//     git remote -v           System.out.println(stm);
                 rs.next();
 //                while(rs.next())
 //                System.out.println(rs.getInt("ss"));

@@ -15,7 +15,7 @@ function w(cid,contests_name,mid,mesname,begin_time,end_time,times) {
         type: 'get',
         dataType : "json",
         async:false,
-        url : "../Message?name="+"&status=1" +"&page=0"+"&limit=0",
+        url : "../Message?name="+"&status=1" +"&page=0"+"&limit=0&all=1",
         success:function(data){
             var html = [];
             for (var i=0;i<data.length;i++){
